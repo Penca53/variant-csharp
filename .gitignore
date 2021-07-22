@@ -1,0 +1,9 @@
+# Visual Studio Code
+.vscode
+
+# Build
+bin
+obj
+
+# Project
+Variant.csproj
