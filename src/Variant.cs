@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Penca53.Variant
 {
     public interface IVariantHolder
@@ -15,6 +17,7 @@ namespace Penca53.Variant
         public bool Is<U>() => typeof(U) == typeof(T);
     }
 
+    [JsonConverter(typeof(VariantConverter))]
     public class Variant<T1, T2>
     {
         public VariantIndex Index { get; private set; }
