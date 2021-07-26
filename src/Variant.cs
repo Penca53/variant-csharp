@@ -15,6 +15,11 @@ namespace Penca53.Variant
             => Item = item;
 
         public bool Is<U>() => typeof(U) == typeof(T);
+
+        public override string ToString()
+        {
+            return Item.ToString();
+        }
     }
 
     [JsonConverter(typeof(VariantConverter))]
@@ -91,6 +96,11 @@ namespace Penca53.Variant
                 default:
                     return 0;
             }
+        }
+
+        public override string ToString()
+        {
+            return _variant.ToString();
         }
 
         private T Get<T>() => ((VariantHolder<T>)_variant).Item;
