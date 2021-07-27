@@ -9,8 +9,8 @@ namespace Penca53
         {
             Variant<double, string> variant = new Variant<double, string>();
 
-            // Get the index of the current item
-            Console.WriteLine(variant.Index);
+            // Get the type of the current item
+            Console.WriteLine(variant.Type);
 
             Console.WriteLine();
 
@@ -23,7 +23,7 @@ namespace Penca53
             Console.WriteLine((double)variant);
 
             // Get the index of the current item
-            Console.WriteLine(variant.Index);
+            Console.WriteLine(variant.Type);
 
             Console.WriteLine();
 
@@ -36,7 +36,7 @@ namespace Penca53
             Console.WriteLine((string)variant);
 
             // Get the index of the current item
-            Console.WriteLine(variant.Index);
+            Console.WriteLine(variant.Type);
 
             Console.ReadKey();
         }

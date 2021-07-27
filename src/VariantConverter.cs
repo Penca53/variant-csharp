@@ -54,19 +54,18 @@ namespace Penca53.Variant
                 Variant<T1, T2> variant = new Variant<T1, T2>();
 
                 reader.Read();
-                VariantIndex index = (VariantIndex)JsonSerializer.Deserialize<int>(ref reader, options);
+                VariantType type = (VariantType)JsonSerializer.Deserialize<int>(ref reader, options);
 
                 reader.Read();
-                switch (index)
+                switch (type)
                 {
-                    case VariantIndex.NONE:
+                    case VariantType.NONE:
                         reader.Read();
                         break;
-                    case VariantIndex.T1:
-                        T1 a = JsonSerializer.Deserialize<T1>(ref reader, options);
-                        variant = a;
+                    case VariantType.T1:
+                        variant = JsonSerializer.Deserialize<T1>(ref reader, options);
                         break;
-                    case VariantIndex.T2:
+                    case VariantType.T2:
                         variant = JsonSerializer.Deserialize<T2>(ref reader, options);
                         break;
                 }
@@ -80,18 +79,18 @@ namespace Penca53.Variant
             {
                 writer.WriteStartObject();
 
-                writer.WriteNumber(nameof(variant.Index), (int)variant.Index);
+                writer.WriteNumber(nameof(variant.Type), (int)variant.Type);
 
-                writer.WritePropertyName("Item");
-                switch (variant.Index)
+                writer.WritePropertyName("Variant");
+                switch (variant.Type)
                 {
-                    case VariantIndex.NONE:
+                    case VariantType.NONE:
                         writer.WriteNullValue();
                         break;
-                    case VariantIndex.T1:
+                    case VariantType.T1:
                         JsonSerializer.Serialize<T1>(writer, variant.GetT1(), options);
                         break;
-                    case VariantIndex.T2:
+                    case VariantType.T2:
                         JsonSerializer.Serialize<T2>(writer, variant.GetT2(), options);
                         break;
                 }

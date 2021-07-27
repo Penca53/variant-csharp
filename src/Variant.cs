@@ -2,48 +2,30 @@ using System.Text.Json.Serialization;
 
 namespace Penca53.Variant
 {
-    public interface IVariantHolder
-    {
-        bool Is<T>();
-    }
-
-    public class VariantHolder<T> : IVariantHolder
-    {
-        public T Item { get; }
-
-        public VariantHolder(T item)
-            => Item = item;
-
-        public bool Is<U>() => typeof(U) == typeof(T);
-
-        public override string ToString()
-        {
-            return Item.ToString();
-        }
-    }
-
     [JsonConverter(typeof(VariantConverter))]
-    public class Variant<T1, T2>
+    public struct Variant<T1, T2>
     {
-        public VariantIndex Index { get; private set; }
-        private IVariantHolder _variant { get; set; }
+        public VariantType Type { get; private set; }
+        private object _variant { get; set; }
 
-        public Variant()
-            => Index = VariantIndex.NONE;
-        public Variant(T1 item) : this(new VariantHolder<T1>(item), VariantIndex.T1) { }
-        public Variant(T2 item) : this(new VariantHolder<T2>(item), VariantIndex.T2) { }
-        private Variant(IVariantHolder variant, VariantIndex index)
+        public Variant(T1 item) : this(item, VariantType.T1) { }
+        public Variant(T2 item) : this(item, VariantType.T2) { }
+        private Variant(object variant, VariantType type)
         {
             _variant = variant;
-            Index = index;
+            Type = type;
         }
 
         public T1 GetT1()
             => Get<T1>();
         public T2 GetT2()
             => Get<T2>();
+
         public bool Is<T>()
-            => _variant.Is<T>();
+            => _variant is T;
+
+        public int GetIndex()
+            => (int)Type - 1;
 
         public static implicit operator Variant<T1, T2>(T1 item)
             => new Variant<T1, T2>(item);
@@ -56,59 +38,19 @@ namespace Penca53.Variant
             => item.Get<T2>();
 
         public override bool Equals(object obj)
-        {
-            if (obj == null || !(obj is Variant<T1, T2>))
-            {
-                return false;
-            }
-
-            Variant<T1, T2> other = (Variant<T1, T2>)obj;
-
-            if (Index != other.Index)
-            {
-                return false;
-            }
-
-            switch (Index)
-            {
-                case VariantIndex.NONE:
-                    return true;
-                case VariantIndex.T1:
-                    return Get<T1>().Equals(other.Get<T1>());
-                case VariantIndex.T2:
-                    return Get<T2>().Equals(other.Get<T2>());
-                default:
-                    return false;
-            }
-        }
-
-
+            => _variant.Equals(obj);
         public override int GetHashCode()
-        {
-            switch (Index)
-            {
-                case VariantIndex.NONE:
-                    return 0;
-                case VariantIndex.T1:
-                    return Get<T1>().GetHashCode();
-                case VariantIndex.T2:
-                    return Get<T2>().GetHashCode();
-                default:
-                    return 0;
-            }
-        }
-
+            => _variant.GetHashCode();
         public override string ToString()
-        {
-            return _variant.ToString();
-        }
+            => _variant.ToString();
 
-        private T Get<T>() => ((VariantHolder<T>)_variant).Item;
+        private T Get<T>()
+            => (T)_variant;
     }
 
-    public enum VariantIndex
+    public enum VariantType
     {
-        NONE = -1,
+        NONE,
         T1,
         T2,
         T3,
@@ -116,7 +58,7 @@ namespace Penca53.Variant
         T5,
         T6,
         T7,
-        T8,
+        T8
     }
 }
 
