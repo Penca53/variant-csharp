@@ -40,9 +40,9 @@ namespace Penca53.Variant
         public override bool Equals(object obj)
             => _variant.Equals(obj);
         public override int GetHashCode()
-            => _variant.GetHashCode();
+            => _variant?.GetHashCode() ?? 0;
         public override string ToString()
-            => _variant.ToString();
+            => _variant?.ToString() ?? "";
 
         private T Get<T>()
             => (T)_variant;
