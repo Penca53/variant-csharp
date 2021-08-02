@@ -1,9 +1,8 @@
-# Visual Studio Code
-.vscode
-
-# Build
-bin
-obj
-
-# Project
-*.csproj
+[Bb]in/
+[Oo]bj/
+*.suo
+*.user
+*.userprefs
+.vs/
+.vscode/
+.DS_Store
