@@ -12,6 +12,16 @@ namespace Penca53
             // Get the type of the current item
             Console.WriteLine(variant.Type);
 
+            if (variant.TryGetT1(out double myDouble0))
+            {
+                Console.WriteLine("Successfully returned a double: " + myDouble0);
+            }
+
+            if (variant.TryGetT2(out string myString0))
+            {
+                Console.WriteLine("Successfully returned a string: " + myString0);
+            }
+
             Console.WriteLine();
 
             // Set the double value to the variant
@@ -21,6 +31,16 @@ namespace Penca53
             Console.WriteLine(variant.GetT1());
             // Get the item using the overridden cast operator
             Console.WriteLine((double)variant);
+
+            if (variant.TryGetT1(out double myDouble1))
+            {
+                Console.WriteLine("Successfully returned a double: " + myDouble1);
+            }
+
+            if (variant.TryGetT2(out string myString1))
+            {
+                Console.WriteLine("Successfully returned a string: " + myString1);
+            }
 
             // Get the index of the current item
             Console.WriteLine(variant.Type);
@@ -34,6 +54,16 @@ namespace Penca53
             Console.WriteLine(variant.GetT2());
             // Get the item using the overridden cast operator
             Console.WriteLine((string)variant);
+
+            if (variant.TryGetT1(out double myDouble2))
+            {
+                Console.WriteLine("Successfully returned a double: " + myDouble2);
+            }
+
+            if (variant.TryGetT2(out string myString2))
+            {
+                Console.WriteLine("Successfully returned a string: " + myString2);
+            }
 
             // Get the index of the current item
             Console.WriteLine(variant.Type);

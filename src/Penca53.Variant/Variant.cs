@@ -21,6 +21,31 @@ namespace Penca53.Variant
         public T2 GetT2()
             => Get<T2>();
 
+        public bool TryGetT1(out T1 t1)
+        {
+            t1 = default;
+
+            if (Type == VariantType.T1)
+            {
+                t1 = Get<T1>();
+                return true;
+            }
+
+            return false;
+        }
+        public bool TryGetT2(out T2 t2)
+        {
+            t2 = default;
+
+            if (Type == VariantType.T2)
+            {
+                t2 = Get<T2>();
+                return true;
+            }
+
+            return false;
+        }
+
         public bool Is<T>()
             => _variant is T;
 
