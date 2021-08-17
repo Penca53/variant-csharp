@@ -2,6 +2,8 @@
 
 C# implementation of C++ [std::variant](https://en.cppreference.com/w/cpp/utility/variant). An instance of Variant at any given time either holds a value of one of its alternative types, or null. It provides compile-time type safety and highly optimized operations.
 
+✅ JSON serialization with System.Text.Json supported
+
 # Usage
 
 ## Initialization
