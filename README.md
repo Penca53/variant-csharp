@@ -18,7 +18,7 @@ Variant<double, string> implicitContructor = 1d;
 ```
 
 `string` (T2)
-```
+```cs
 Variant<double, string> explicitConstructor = new Variant<double, string>("Hello");
 Variant<double, string> implicitContructor = "Hello";
 ```
