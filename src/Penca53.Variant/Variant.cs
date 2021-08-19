@@ -76,7 +76,15 @@ namespace Penca53.Variant
             else
             {
                 Variant<T1, T2> v = (Variant<T1, T2>)obj;
-                return _variant.Equals(v._variant);
+
+                if (Type == VariantType.NONE && v.Type == VariantType.NONE)
+                {
+                    return true;
+                }
+                else
+                {
+                    return _variant.Equals(v._variant);
+                }
             }
         }
 
