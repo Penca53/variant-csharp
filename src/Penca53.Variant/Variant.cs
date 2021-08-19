@@ -5,6 +5,11 @@ namespace Penca53.Variant
     [JsonConverter(typeof(VariantConverter))]
     public struct Variant<T1, T2>
     {
+        public static Variant<T1, T2> Empty
+        {
+            get => new Variant<T1, T2>();
+        }
+
         public VariantType Type { get; private set; }
         private object _variant { get; set; }
 
@@ -63,7 +68,18 @@ namespace Penca53.Variant
             => item.Get<T2>();
 
         public override bool Equals(object obj)
-            => _variant.Equals(obj);
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Variant<T1, T2> v = (Variant<T1, T2>)obj;
+                return _variant.Equals(v._variant);
+            }
+        }
+
         public override int GetHashCode()
             => _variant?.GetHashCode() ?? 0;
         public override string ToString()
