@@ -1,5 +1,9 @@
 # Variant CSharp
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Penca53/variant-csharp/.NET)
+![GitHub](https://img.shields.io/github/license/Penca53/variant-csharp)
+![Nuget](https://img.shields.io/nuget/v/Penca53.Variant)
+
 C# implementation of C++ [std::variant](https://en.cppreference.com/w/cpp/utility/variant). An instance of Variant at any given time either holds a value of one of its alternative types, or null. It provides compile-time type safety and highly optimized operations.
 
 ✅ JSON serialization with System.Text.Json supported
